@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intrinsic Value and Book Value Calculators</title>
+    </head>
+<body>
+
+    <h1>Investment Calculators</h1>
+	
+	<div>
+		<form name="avgcalculator">  
+            <h2>Average Book Value Calculator</h2>
+            <p>Old Book Value(₹): 
+            <input type="number" name="obv" required>
+            <p>Current Book Value (₹): <input type="number" name="cbv" required> 
+			<p>Number of Years between: <input type="number" name="years" required>
+            <div id="button"> 
+                <input type="button" value="Calculate" onclick="javascript:gain();">
+				<input type="button" value="clear" onclick="javascript:reset();">
+            </div>
+            <p>Average Percent Change in Book Value Per Year (%):<input type="text" name="average" maxlength="4" size="4" readonly> </p>  
+        </form>
+	</div>
+
+    <!-- Second Form: Intrinsic Value Calculator -->
+    <div>
+        <form name="calculator">  
+            <h2>Intrinsic Value Calculator</h2>
+            <p>Cash Taken Out of Business (₹): 
+            <input type="number" name="coupon" required> <span class="desc-label">* This is dividends received for 1 year.</span></p>
+            <p>Current Book Value (₹): <input type="number" name="par" required> <span class="desc-label">* We need to know this so we can determine the base value that's changing.</span></p>
+            <p>Average Percent Change in Book Value Per Year (%): <input type="number" name="bvc" required> <span class="desc-label">* This will determine the estimate BV at the end of the next 10 years.</span></p>   
+            <p>Years: <input type="number" name="year" required> <span class="desc-label">* This will most likely be 10 (if you're comparing a 10 year federal note).</span></p>
+            <p>(Discount Rate) 10 Year Federal Note (%): <input type="number" name="r" required> <span class="desc-label">
+            <div id="button" class="buffet-book-btn"> 
+                <input type="button" value="Calculate" onclick="javascript:multiply();">
+				<input type="button" value="clear" onclick="javascript:reset();">
+            </div>
+            <p>Intrinsic Value (₹): <input type="text" name="total" maxlength="4" size="4" readonly> </p>  
+        </form>
+    </div>
+
+    
+
+</body>
+</html>
