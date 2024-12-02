@@ -4,7 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Intrinsic Value and Book Value Calculators</title>
-    </head>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212; /* Dark background */
+            color: #e0e0e0; /* Light text color */
+            line-height: 1.6;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #ffffff; /* White for headings */
+        }
+
+        h2 {
+            color: #bb86fc; /* Light purple for subheadings */
+            margin-bottom: 15px;
+        }
+
+        div {
+            margin: 20px auto;
+            max-width: 600px;
+            padding: 20px;
+            background: #1e1e1e; /* Darker card background */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #333; /* Dark border */
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: #333; /* Input background */
+            color: #e0e0e0; /* Input text color */
+        }
+
+        input[type="button"] {
+            padding: 10px;
+            background-color: #bb86fc; /* Light purple button */
+            color: #121212; /* Dark text on button */
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="button"]:hover {
+            background-color: #9b59b6; /* Darker purple on hover */
+        }
+
+        .desc-label {
+            display: block;
+            font-size: 12px;
+            color: #b0bec5; /* Light gray for labels */
+        }
+
+        a {
+            color: #bb86fc; /* Light purple for links */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
 <body>
 
     <h1>Investment Calculators</h1>
@@ -42,7 +126,53 @@
         </form>
     </div>
 
-    
+    <script>
+        // JavaScript functions here
+        function gain() {
+            // Get input values
+            const cbv = Number(document.avgcalculator.cbv.value); // Current Book Value
+            const obv = Number(document.avgcalculator.obv.value); // Old Book Value
+            const years = Number(document.avgcalculator.years.value); // Number of Years
+
+            // Validate input values
+            if (obv === 0) {
+                alert("Old Book Value cannot be zero.");
+                return;
+            }
+
+            // Calculate average book value change
+            const averageChange = ((cbv - obv) / obv) * 100 / years;
+
+            // Set the result in the totals input field
+            document.avgcalculator.average.value = averageChange.toFixed(2);
+        }
+
+        function multiply() {
+            // Get input values
+            const coupon = Number(document.calculator.coupon.value); // Cash Taken Out of Business
+            const par = Number(document.calculator.par.value); // Current Book Value
+            const bvc = Number(document.calculator.bvc.value) / 100; // Average Percent Change in Book Value (as decimal)
+            const years = Number(document.calculator.year.value); // Years
+            const r = Number(document.calculator.r.value) / 100; // Discount Rate (as decimal)
+
+            // Validate input values
+            if (r === 0) {
+                alert("Discount Rate cannot be zero.");
+                return;
+            }
+
+            // Calculate intrinsic value
+            const intrinsicValue = (coupon * (1 - Math.pow(1 + r, -years)) / r) +
+                (par * Math.pow(1 + bvc, years) / Math.pow(1 + r, years));
+
+            // Set the result in the total input field
+            document.calculator.total.value = intrinsicValue.toFixed(2);
+        }
+		
+		function reset() {
+			document.getElementById("avgcalculator").reset();
+		}
+    </script>
 
 </body>
 </html>
